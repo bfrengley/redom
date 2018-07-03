@@ -5,7 +5,11 @@ export const createElement = (query, ns) => {
   const element = ns ? document.createElementNS(ns, tag) : document.createElement(tag);
 
   if (id) {
-    element.id = id;
+    if (ns) {
+      element.setAttribute('id', id);
+    } else {
+      element.id = id;
+    }
   }
 
   if (className) {
