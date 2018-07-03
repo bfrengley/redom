@@ -34,12 +34,23 @@ export const setAttr = (view, arg1, arg2) => {
 
 function setXlink (el, obj) {
   for (const key in obj) {
-    el.setAttributeNS(xlinkns, key, obj[key]);
+    const value = obj[key];
+    if (value == null) {
+      el.removeAttributeNS(xlinkns, key, value);
+    } else {
+      el.setAttributeNS(xlinkns, key, value);
+    }
   }
 }
 
 function setData (el, obj) {
   for (const key in obj) {
-    el.dataset[key] = obj[key];
+    const value = obj[key];
+
+    if (value == null) {
+      delete el.dataset[key];
+    } else {
+      el.dataset[key] = value;
+    }
   }
 }
